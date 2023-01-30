@@ -29,7 +29,7 @@ class NormalResponse(BaseModel):
 
 def get_c_from_service2() -> NormalResponse:
     ws = websocket.WebSocket()
-    ws.connect("ws://ws-server:8080/sum")
+    ws.connect("ws://localhost:8080/sum")
     resp = ws.recv()
     c = json.loads(resp)["value"]
     ws.close()
@@ -38,7 +38,7 @@ def get_c_from_service2() -> NormalResponse:
 
 def handle_post_to_service2(request: NormalRequest, endpoint: str = "a"):
     ws = websocket.WebSocket()
-    ws.connect("ws://ws-server:8080/send")
+    ws.connect("ws://localhost:8080/send")
     ws.send(json.dumps({"value": request.value, "endpoint": endpoint}))
     ws.close()
     return
